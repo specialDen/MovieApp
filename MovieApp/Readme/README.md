@@ -15,7 +15,7 @@ MovieApp is a movies app where you get the latest movies, as well as movies of d
 
 ## Setup:
 
-1. [Get your Movies API key](https://newsapi.org)
+1. [Get your Movies API key](https://www.themoviedb.org/)
 
 2. Insert your API key into a Keys.swift file and inject it into the project as a struct as shown below
 
