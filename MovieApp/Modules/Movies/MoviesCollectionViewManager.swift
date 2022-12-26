@@ -14,7 +14,12 @@ protocol MoviesCollectionViewManagerProtocol {
 
 class MoviesCollectionViewManager: NSObject {
     weak var collectionView: UICollectionView?
+    weak var delegate: MoviesCollectionViewManagerDelegate?
     private var movieSections =  [MovieLists]()
+    
+    deinit {
+        print("movies collectionViewManager deinit")
+    }
 }
 
 extension MoviesCollectionViewManager: MoviesCollectionViewManagerProtocol {
@@ -40,7 +45,7 @@ extension MoviesCollectionViewManager: MoviesCollectionViewManagerProtocol {
 extension MoviesCollectionViewManager: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
-        // inform the presenter that a cell is tapped
+        delegate?.cellClicked(movie: movieSections[indexPath.section].items[indexPath.row])
     }
 }
 extension MoviesCollectionViewManager: UICollectionViewDataSource {

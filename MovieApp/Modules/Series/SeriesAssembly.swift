@@ -21,7 +21,25 @@ struct SeriesAssembly {
         presenter.collectionManager = collectionViewManager
         seriesViewController.presenter = presenter
         interactor.apiManager = NetworkService()
+        router.view = seriesViewController
+        collectionViewManager.delegate = presenter
         
         return seriesViewController
+    }
+    
+    static func createGenresVC(view: UIViewController?)-> GenresViewController{
+        let genresVC = GenresViewController()
+        let interactor = SeriesInteractor()
+        let presenter = SeriesPresenter()
+        let router = SeriesRouter()
+        
+        genresVC.seriesPresenter = presenter
+        genresVC.seriesPresenter?.interactor = interactor
+        interactor.apiManager = NetworkService()
+        interactor.presenter = presenter
+        presenter.router = router
+        router.view = view
+        
+        return genresVC
     }
 }

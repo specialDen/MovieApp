@@ -23,20 +23,23 @@ struct MoviesAssembly {
         moviesViewController.presenter = presenter
         interactor.apiManager = NetworkService()
         router.view = moviesViewController
-
+        collectionViewManager.delegate = presenter
         
         return moviesViewController
     }
     
-    static func createGenresVC()-> GenresViewController{
+    static func createGenresVC(view: UIViewController?)-> GenresViewController{
         let genresVC = GenresViewController()
         let interactor = MoviesInteractor()
         let presenter = MoviesPresenter()
+        let router = MoviesRouter()
         
-        genresVC.presenter = presenter
-        genresVC.presenter?.interactor = interactor
+        genresVC.moviesPresenter = presenter
+        genresVC.moviesPresenter?.interactor = interactor
         interactor.apiManager = NetworkService()
         interactor.presenter = presenter
+        presenter.router = router
+        router.view = view
         
         return genresVC
     }

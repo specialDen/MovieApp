@@ -50,11 +50,18 @@ extension AppCoordinator {
                                                        selectedImage:  UIImage.tabBarItems.favourites)
         return UINavigationController(rootViewController: favouritesViewController)
     }
-    
+    private func createSearchVC() -> UINavigationController {
+        let searchViewController = SearchAssembly.createSearchVC()
+        searchViewController.title = "Search"
+        searchViewController.tabBarItem = UITabBarItem(title: "Search",
+                                                       image: UIImage.tabBarItems.search,
+                                                       selectedImage:  UIImage.tabBarItems.search)
+        return UINavigationController(rootViewController: searchViewController)
+    }
     private func createTabBarVC() -> UITabBarController {
         let tabBarVC = UITabBarController()
         UITabBar.appearance().tintColor = UIColor.tintColor
-        tabBarVC.viewControllers = [createMoviesVC(), createSeriesVC(), createFavouritesVC(), createSettingsVC()]
+        tabBarVC.viewControllers = [createMoviesVC(), createSeriesVC(),createSearchVC(), createFavouritesVC(), createSettingsVC()]
         
         return tabBarVC
     }

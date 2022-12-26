@@ -15,23 +15,28 @@ class SeriesPresenter  {
     var seriesSections: [SeriesLists] = []
     var collectionManager: SeriesCollectionViewManagerProtocol?
     
-    
+    deinit {
+        print("series presenter deinit")
+    }
 }
 
 extension SeriesPresenter: SeriesPresenterProtocol {
     func viewDidLoad() {
         //fetch data from interactor
         interactor?.getSeries()
+//        collectionManager.delegate = self
     }
     
-    
+    func viewNeedsGenres() {
+        interactor?.getGenres()
+    }
     
 }
 
 extension SeriesPresenter: SeriesCollectionViewManagerDelegate {
-    func cellClicked(article: Series?) {
+    func cellClicked(series: Series) {
         // Router - present description view
-        
+        router?.presentDecriptionVC(with: series, navVc: nil)
     }
     
     
@@ -52,5 +57,17 @@ extension SeriesPresenter: SeriesPresenterInput {
         //??
     }
     
+    func genresFetchSuccess(genres: Genres){
+        self.router?.presentGenresVC(with: genres)
+    }
+    func genresSeriesFetchSuccess(series: [Series], genre: String) {
+        self.router?.presentSeries(series, ofGenre: genre)
+    }
     
+}
+
+extension SeriesPresenter: SeriesGenrePresenterProtocol {
+    func getSeries(withGenre genre: GenreModel) {
+        interactor?.getGenreSeries(withGenre: genre)
+    }
 }
