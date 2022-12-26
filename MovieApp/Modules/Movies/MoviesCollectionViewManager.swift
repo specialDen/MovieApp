@@ -14,7 +14,12 @@ protocol MoviesCollectionViewManagerProtocol {
 
 class MoviesCollectionViewManager: NSObject {
     weak var collectionView: UICollectionView?
+    weak var delegate: MoviesCollectionViewManagerDelegate?
     private var movieSections =  [MovieLists]()
+
+    deinit {
+        print("movies collectionViewManager deinit")
+    }
 }
 
 extension MoviesCollectionViewManager: MoviesCollectionViewManagerProtocol {
@@ -22,10 +27,13 @@ extension MoviesCollectionViewManager: MoviesCollectionViewManagerProtocol {
         self.collectionView = collectionView
         self.collectionView?.delegate = self
         self.collectionView?.dataSource = self
-        self.collectionView?.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: TitleCollectionViewCell.reuseIdentifier)
-        self.collectionView?.register(CollectionViewHeaderReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionViewHeaderReusableView.reuseIdentifier)
+        self.collectionView?.register(TitleCollectionViewCell.self,
+                                      forCellWithReuseIdentifier: TitleCollectionViewCell.reuseIdentifier)
+        self.collectionView?.register(CollectionViewHeaderReusableView.self,
+                                      forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                      withReuseIdentifier: CollectionViewHeaderReusableView.reuseIdentifier)
     }
-    
+
     func setUpMovies(_ movies: [MovieLists]) {
         self.movieSections = movies
         DispatchQueue.main.async {
@@ -33,25 +41,24 @@ extension MoviesCollectionViewManager: MoviesCollectionViewManagerProtocol {
 
         }
     }
-    
-    
+
 }
 
 extension MoviesCollectionViewManager: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
-        // inform the presenter that a cell is tapped
+        delegate?.cellClicked(movie: movieSections[indexPath.section].items[indexPath.row])
     }
 }
 extension MoviesCollectionViewManager: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         movieSections[section].count
     }
-    
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         movieSections.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TitleCollectionViewCell.reuseIdentifier, for: indexPath) as? TitleCollectionViewCell else {
             return UICollectionViewCell()
@@ -64,20 +71,20 @@ extension MoviesCollectionViewManager: UICollectionViewDataSource {
 
         return cell
     }
-    
-    
+
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionViewHeaderReusableView.reuseIdentifier, for: indexPath) as! CollectionViewHeaderReusableView
-            header.setup(movieSections[indexPath.section].title)
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                               withReuseIdentifier: CollectionViewHeaderReusableView.reuseIdentifier,
+                                                                               for: indexPath) as? CollectionViewHeaderReusableView else {return .init()}
+                    header.setup(movieSections[indexPath.section].title)
             return header
-            
+
         default:
             return .init()
         }
-        
+
     }
-    
-    
+
 }

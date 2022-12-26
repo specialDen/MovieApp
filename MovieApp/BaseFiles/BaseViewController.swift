@@ -27,12 +27,8 @@ class BaseViewController: UIViewController {
     var rightBarButtonItem: UIBarButtonItem?
     
     lazy var collectionView: UICollectionView = {
-//        let layout = createLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.backgroundColor = .clear
-//        collectionView.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: TitleCollectionViewCell.reuseIdentifier)
-//        collectionView.collectionViewLayout = createLayout()
-        
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         return collectionView
     }()
@@ -41,15 +37,6 @@ class BaseViewController: UIViewController {
         super.viewDidLayoutSubviews()
         }
     
-//    let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
-//    let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .absolute(70), heightDimension: .absolute(70)), subitems: [item])
-//    let section = NSCollectionLayoutSection(group: group)
-//    section.orthogonalScrollingBehavior = .continuous
-//    section.interGroupSpacing = 10
-//    section.contentInsets = .init(top: 0, leading: 10, bottom: 30, trailing: 10)
-//    section.boundarySupplementaryItems = [self.supplementaryHeaderItem()]
-//    section.supplementariesFollowContentInsets = false
-//    return section
     
     private func createLayout() -> UICollectionViewCompositionalLayout {
         UICollectionViewCompositionalLayout {[weak self]_,_ in

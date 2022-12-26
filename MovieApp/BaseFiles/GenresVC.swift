@@ -8,7 +8,8 @@
 import UIKit
 
 class GenresViewController: UITableViewController {
-    var presenter: MoviesPresenter?
+    var moviesPresenter: MoviesPresenter?
+    var seriesPresenter: SeriesPresenter?
     var genres: [GenreModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,8 @@ class GenresViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        presenter?.getMovies(withGenreId: genres[indexPath.row].id)
+        moviesPresenter?.getMovies(withGenre: genres[indexPath.row])
+        seriesPresenter?.getSeries(withGenre: genres[indexPath.row])
     }
     
     func configureGenres(with genres: [GenreModel]) {

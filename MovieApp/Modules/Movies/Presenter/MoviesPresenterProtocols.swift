@@ -20,16 +20,16 @@ protocol MoviesrPresenterInput: AnyObject {
     func apiFetchSuccess(movies: MovieLists)
     func handleError(error: Error)
     func genresFetchSuccess(genres: Genres)
-    func genresMoviesFetchSuccess(movies: [Movie])
+    func genresMoviesFetchSuccess(movies: [Movie], genre: String)
 }
 
 
 //manager to presenter
 protocol MoviesCollectionViewManagerDelegate: AnyObject {
-    func cellClicked(article: Movie?)
+    func cellClicked(movie: Movie)
 }
 
 // GenreVC to presenter
 protocol MovieGenrePresenterProtocol: AnyObject {
-    func getMovies(withGenreId id: Int)
+    func getMovies(withGenre genre: GenreModel)
 }

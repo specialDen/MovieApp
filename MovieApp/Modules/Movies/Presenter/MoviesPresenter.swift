@@ -7,27 +7,17 @@
 
 import Foundation
 
-//protocol AnyPresenter{
-//    var router: MoviesRouterProtocol? { get set }
-//    var interactor: MoviesInteractorProtocol? { get set }
-//    var view: MoviesViewInput? { get set }
-//    func updateViewData() -> MoviesData?
-//
-//}
 
 class MoviesPresenter  {
     var router: MoviesRouterProtocol?
     
     var interactor: MoviesInteractorProtocol?
     var movieSections: [MovieLists] = []
-//    var view: MoviesViewInput?
     var collectionManager: MoviesCollectionViewManagerProtocol?
-//    func updateViewData() -> MoviesData? {
-//        let movies = interactor?.getMovies()
-//        return movies
-//    }
     
-    
+    deinit {
+        print("movies presenter deinit")
+    }
 }
 
 extension MoviesPresenter: MoviesPresenterProtocol {
@@ -39,14 +29,12 @@ extension MoviesPresenter: MoviesPresenterProtocol {
     func viewNeedsGenres() {
         interactor?.getGenres()
     }
-    
-    
+        
 }
 
 extension MoviesPresenter: MoviesCollectionViewManagerDelegate {
-    func cellClicked(article: Movie?) {
-        // Router - present deccription view
-        
+    func cellClicked(movie: Movie) {
+        router?.presentDecriptionVC(with: movie, navVc: nil)
     }
     
     
@@ -60,7 +48,6 @@ extension MoviesPresenter: MoviesrPresenterInput {
         } else {
             movieSections.append(movies)
         }
-//        movieSections?.sections.append(articles)
         self.collectionManager?.setUpMovies(movieSections)
     }
     
@@ -71,16 +58,14 @@ extension MoviesPresenter: MoviesrPresenterInput {
     func genresFetchSuccess(genres: Genres){
         self.router?.presentGenresVC(with: genres)
     }
-    func genresMoviesFetchSuccess(movies: [Movie]) {
-        
+    func genresMoviesFetchSuccess(movies: [Movie], genre: String) {
+        self.router?.presentMovies(movies, ofGenre: genre)
     }
     
 }
 
 extension MoviesPresenter: MovieGenrePresenterProtocol {
-    func getMovies(withGenreId id: Int) {
-        interactor?.getGenreMovies(withId: id)
+    func getMovies(withGenre genre: GenreModel) {
+        interactor?.getGenreMovies(withGenre: genre)
     }
-    
-    
 }

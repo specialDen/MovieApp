@@ -20,9 +20,10 @@ final class NetworkService<E: EndPointProtocol> : NetworkServiceProtocol {
             return
         }
         
+        URLRequest(url: url).httpMethod = "
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
-                debugPrint(error.localizedDescription)
+//                debugPrint(error.localizedDescription)
                 completion(.failure(error))
             }
             
@@ -43,7 +44,7 @@ final class NetworkService<E: EndPointProtocol> : NetworkServiceProtocol {
             let result = try decoder.decode(T.self, from: data)
             return .success(result)
         } catch {
-            print("error while decoding data", error)
+//            print("error while decoding data", error)
             return .failure(error)
         }
     }
