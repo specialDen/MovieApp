@@ -29,10 +29,6 @@
 		B630A74A28EDE3D9008E4E0C /* GenreMoviesCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B630A74928EDE3D9008E4E0C /* GenreMoviesCollectionVC.swift */; };
 		B637CBF828CCD6E50031C23B /* MoviesPresenterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B637CBF728CCD6E50031C23B /* MoviesPresenterProtocols.swift */; };
 		B637CBFA28CCD7F40031C23B /* MoviesCollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B637CBF928CCD7F40031C23B /* MoviesCollectionViewManager.swift */; };
-		B63E252C2959A57E008F674F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B63E252B2959A57E008F674F /* README.md */; };
-		B63E25442959B536008F674F /* movieApp_movie2.gif in Resources */ = {isa = PBXBuildFile; fileRef = B63E25412959B536008F674F /* movieApp_movie2.gif */; };
-		B63E25452959B536008F674F /* movieApp_movie3.gif in Resources */ = {isa = PBXBuildFile; fileRef = B63E25422959B536008F674F /* movieApp_movie3.gif */; };
-		B63E25462959B536008F674F /* movieApp_movie1.gif in Resources */ = {isa = PBXBuildFile; fileRef = B63E25432959B536008F674F /* movieApp_movie1.gif */; };
 		B63FBD8A2900187A00596C7D /* SearchSugestionsTableViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63FBD892900187A00596C7D /* SearchSugestionsTableViewVC.swift */; };
 		B658646E28DB4E0000ED1F36 /* SeriesCollectionViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B658646D28DB4E0000ED1F36 /* SeriesCollectionViewManager.swift */; };
 		B689D0C827B2E485005A5571 /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = B689D0C727B2E485005A5571 /* EndPoints.swift */; };
@@ -490,10 +486,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B63E25452959B536008F674F /* movieApp_movie3.gif in Resources */,
-				B63E252C2959A57E008F674F /* README.md in Resources */,
-				B63E25462959B536008F674F /* movieApp_movie1.gif in Resources */,
-				B63E25442959B536008F674F /* movieApp_movie2.gif in Resources */,
 				B6E169D627AA80FC0090A96F /* LaunchScreen.storyboard in Resources */,
 				B6E169D327AA80FC0090A96F /* Assets.xcassets in Resources */,
 			);
@@ -518,7 +510,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		B68306DD29B202D90010E054 /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
