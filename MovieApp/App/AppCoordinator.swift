@@ -21,8 +21,8 @@ extension AppCoordinator {
         let moviesViewController = MoviesAssembly.createMoviesVC()
         moviesViewController.title = "Movies"
         moviesViewController.tabBarItem = UITabBarItem(title: "Movies",
-                                                       image: UIImage.tabBarItems.movies,
-                                                       selectedImage:  UIImage.tabBarItems.movies)
+                                                       image: UIImage.TabBarItems.movies,
+                                                       selectedImage:  UIImage.TabBarItems.movies)
         let navController = UINavigationController(rootViewController: moviesViewController)
         return navController
     }
@@ -30,32 +30,32 @@ extension AppCoordinator {
         let tvSeriesViewController = SeriesAssembly.createSeriesVC()
         tvSeriesViewController.title = "Series"
         tvSeriesViewController.tabBarItem = UITabBarItem(title: "Series",
-                                                       image: UIImage.tabBarItems.series,
-                                                       selectedImage:  UIImage.tabBarItems.series)
+                                                       image: UIImage.TabBarItems.series,
+                                                       selectedImage:  UIImage.TabBarItems.series)
         return UINavigationController(rootViewController: tvSeriesViewController)
     }
     private func createSettingsVC() -> UINavigationController {
         let settingsViewController = MoviesAssembly.createMoviesVC()
         settingsViewController.title = "Settings"
         settingsViewController.tabBarItem = UITabBarItem(title: "Settings",
-                                                       image: UIImage.tabBarItems.settings,
-                                                       selectedImage:  UIImage.tabBarItems.settings)
+                                                       image: UIImage.TabBarItems.settings,
+                                                       selectedImage:  UIImage.TabBarItems.settings)
         return UINavigationController(rootViewController: settingsViewController)
     }
     private func createFavouritesVC() -> UINavigationController {
         let favouritesViewController = MoviesAssembly.createMoviesVC()
         favouritesViewController.title = "Favourites"
         favouritesViewController.tabBarItem = UITabBarItem(title: "Favourites",
-                                                       image: UIImage.tabBarItems.favourites,
-                                                       selectedImage:  UIImage.tabBarItems.favourites)
+                                                       image: UIImage.TabBarItems.favourites,
+                                                       selectedImage:  UIImage.TabBarItems.favourites)
         return UINavigationController(rootViewController: favouritesViewController)
     }
     private func createSearchVC() -> UINavigationController {
         let searchViewController = SearchAssembly.createSearchVC()
         searchViewController.title = "Search"
         searchViewController.tabBarItem = UITabBarItem(title: "Search",
-                                                       image: UIImage.tabBarItems.search,
-                                                       selectedImage:  UIImage.tabBarItems.search)
+                                                       image: UIImage.TabBarItems.search,
+                                                       selectedImage:  UIImage.TabBarItems.search)
         return UINavigationController(rootViewController: searchViewController)
     }
     private func createTabBarVC() -> UITabBarController {

@@ -28,9 +28,15 @@ struct Keys {
 3. Run app
 
 ## Screenshots
-![Example-Movie1](./MovieApp/Readme/movieApp_movie1.gif)
-![Example-Movie2](./MovieApp/Readme/movieApp_movie2.gif)
-![Example-Movie3](./MovieApp/Readme/movieApp_movie3.gif)
+
+<p align="center">
+<img src="https://github.com/specialDen/MovieApp/blob/main/MovieApp/Readme/movieApp_movie1.gif"  width="25%" height="25%" />
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<img src="https://github.com/specialDen/MovieApp/blob/main/MovieApp/Readme/movieApp_movie2.gif"  width="25%" height="25%" />
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<img src="https://github.com/specialDen/MovieApp/blob/main/MovieApp/Readme/movieApp_movie3.gif"  width="25%" height="25%" />
+</p>
+
 
 ## Technologies
 * Xcode 12.0

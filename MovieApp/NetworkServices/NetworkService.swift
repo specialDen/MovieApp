@@ -20,6 +20,7 @@ final class NetworkService<E: EndPointProtocol> : NetworkServiceProtocol {
             return
         }
         
+        URLRequest(url: url).httpMethod = "
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
 //                debugPrint(error.localizedDescription)

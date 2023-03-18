@@ -15,8 +15,9 @@ struct MoviesData: Codable {
 }
 
 struct Movie: Codable {
-    
+//    swiftLint: disable identifier_name
     let id: Int?
+    //    swiftLint: disable: identifier_name
     let vote_average: Double?
     let title: String?
     let release_date: String?

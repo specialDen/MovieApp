@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIImage {
-    enum tabBarItems {
+    enum TabBarItems {
         static var movies: UIImage { UIImage(systemName: "tv.circle") ?? UIImage() }
         static var series: UIImage { UIImage(systemName: "play.tv") ?? UIImage() }
         static var favourites: UIImage { UIImage(systemName: "heart") ?? UIImage() }

@@ -35,6 +35,9 @@ extension SeriesCollectionViewManager: SeriesCollectionViewManagerProtocol {
         }
     }
     
+    func trer() {
+        
+    }
     
 }
 

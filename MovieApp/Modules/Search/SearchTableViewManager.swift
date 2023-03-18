@@ -50,6 +50,7 @@ extension SearchTableViewManager: SearchTableViewManagerProtocol {
         tableView.register(TitleTableViewCell.self, forCellReuseIdentifier: TitleTableViewCell.identifier)
         self.contentType = contentType
     }
+    
     func updateContentType(with type: ContentType) {
         self.contentType = type
     }

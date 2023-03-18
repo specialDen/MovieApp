@@ -27,7 +27,6 @@ enum MoviesEndpoint: EndPointProtocol {
     }
     
     
-//https://api.themoviedb.org/3/movie/latest?api_key=8cfd4da25a104540bb0eb7b00344f1f5&language=en-US
     var completeURL: String {
         switch self {
         case .getTrendingMovies:
@@ -56,9 +55,6 @@ enum MoviesEndpoint: EndPointProtocol {
     
 }
 
-//https://api.themoviedb.org/3/discover/tv?api_key=8cfd4da25a104540bb0eb7b00344f1f5&language=en-US&sort_by=popularity.desc&include_adult=false&with_genres=18
-//
-//"https://api.themoviedb.org/3/discover/movie?api_key=8cfd4da25a104540bb0eb7b00344f1f5&language=en-US&sort_by=popularity.desc&include_adult=false&with_genres=Action"
 
 enum SeriesEndpoint: EndPointProtocol {
     
