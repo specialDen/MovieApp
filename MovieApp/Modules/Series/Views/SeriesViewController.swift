@@ -8,27 +8,30 @@
 import UIKit
 
 protocol SeriesViewInput: AnyObject {
-    var presenter: MoviesPresenter? {get set }
+  var presenter: MoviesPresenter? { get set }
 }
 
 class SeriesViewController: BaseViewController {
-    var presenter: SeriesPresenter?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        presenter?.viewDidLoad()
-        self.presenter?.collectionManager?.setUpCollectionView(collectionView: self.collectionView)
-        setUpUI()
-        navigationItem.rightBarButtonItem = .init(title: "Genres", style: .done, target: self, action: #selector(handleRigthBarButtonTap))
-    }
-    
-    @objc func handleRigthBarButtonTap() {
-        presenter?.viewNeedsGenres()
-    }
+  var presenter: SeriesPresenter?
 
-    deinit {
-        print("movies VC deinit")
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    presenter?.viewDidLoad()
+    presenter?.collectionManager?.setUpCollectionView(collectionView: collectionView)
+    setUpUI()
+    navigationItem.rightBarButtonItem = .init(
+      title: "Genres",
+      style: .done,
+      target: self,
+      action: #selector(handleRigthBarButtonTap)
+    )
+  }
+
+  @objc func handleRigthBarButtonTap() {
+    presenter?.viewNeedsGenres()
+  }
+
+  deinit {
+    print("movies VC deinit")
+  }
 }
-
-

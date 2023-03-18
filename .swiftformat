@@ -17,6 +17,7 @@
 --wrapcollections before-first
 --xcodeindentation enabled
 --nospaceoperators ...,..<,..<
+--allman false
 
 # rules
 

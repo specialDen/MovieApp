@@ -7,9 +7,8 @@
 
 import UIKit
 
-class SeriesViewController:ViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
+class SeriesViewController: ViewController {
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
 }

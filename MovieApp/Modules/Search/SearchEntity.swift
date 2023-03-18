@@ -8,20 +8,19 @@
 import Foundation
 
 struct SearchResults: Codable {
-    let results: [SearchModel]
+  let results: [SearchModel]
 }
 
 struct SearchModel: Codable {
-    let id: Int
-    let name: String
+  let id: Int
+  let name: String
 }
 
 enum TableViewContentType {
-    case topMoviesAndSeries(ContentType)
-    case searchResults(ContentType)
+  case topMoviesAndSeries(ContentType)
+  case searchResults(ContentType)
 }
 
 enum ContentType {
-    case movies, series
+  case movies, series
 }
-
