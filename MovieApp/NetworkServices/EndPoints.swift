@@ -119,5 +119,3 @@ enum SearchEndpoint: EndPointProtocol {
     }
 }
 
-//https://api.themoviedb.org/3/search/movie?api_key=8cfd4da25a104540bb0eb7b00344f1f5&language=en-US&query=love&page=1&include_adult=false
-//https://api.themoviedb.org/3/search/movies?api_key=8cfd4da25a104540bb0eb7b00344f1f5&language=en-US&query=Love&page=1

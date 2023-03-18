@@ -30,11 +30,11 @@ struct Keys {
 ## Screenshots
 
 <p align="center">
-<img src="https://github.com/specialDen/MovieApp/blob/main/MovieApp/Readme/movieApp_movie1.gif"  width="25%" height="25%" />
+<img src="https://github.com/specialDen/MovieApp/blob/main/Readme/movieApp_movie1.gif"  width="25%" height="25%" />
   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-<img src="https://github.com/specialDen/MovieApp/blob/main/MovieApp/Readme/movieApp_movie2.gif"  width="25%" height="25%" />
+<img src="https://github.com/specialDen/MovieApp/blob/main/Readme/movieApp_movie2.gif"  width="25%" height="25%" />
   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-<img src="https://github.com/specialDen/MovieApp/blob/main/MovieApp/Readme/movieApp_movie3.gif"  width="25%" height="25%" />
+<img src="https://github.com/specialDen/MovieApp/blob/main/Readme/movieApp_movie3.gif"  width="25%" height="25%" />
 </p>
 
 
