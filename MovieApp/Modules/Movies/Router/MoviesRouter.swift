@@ -10,7 +10,7 @@ import UIKit
 
 protocol MoviesRouterProtocol {
   var view: UIViewController? { get }
-  func presentDecriptionVC(with movie: Movie, navVc: UINavigationController?)
+  func presentDecriptionVC(with movie: Movie, videoKey: String, navVc: UINavigationController?)
   func presentGenresVC(with genres: Genres)
   func presentMovies(_ movies: [Movie], ofGenre genre: String)
 }
@@ -27,13 +27,15 @@ class MoviesRouter: MoviesRouterProtocol {
 
   var view: UIViewController?
 
-  func presentDecriptionVC(with movie: Movie, navVc: UINavigationController?) {
-    let decriptionVC = TitlePreviewViewController()
-    decriptionVC.configureDescription(with: movie)
-    if let navVc = navVc {
-      navVc.pushViewController(decriptionVC, animated: true)
-    } else {
-      view?.navigationController?.pushViewController(decriptionVC, animated: true)
+  func presentDecriptionVC(with movie: Movie, videoKey: String, navVc: UINavigationController?) {
+    DispatchQueue.main.async {
+      let decriptionVC = TitlePreviewViewController()
+      decriptionVC.configureDescription(with: movie, videoKey: videoKey)
+      if let navVc = navVc {
+        navVc.pushViewController(decriptionVC, animated: true)
+      } else {
+        self.view?.navigationController?.pushViewController(decriptionVC, animated: true)
+      }
     }
   }
 

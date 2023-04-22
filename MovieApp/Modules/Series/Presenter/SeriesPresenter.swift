@@ -5,15 +5,17 @@
 //  Created by Izuchukwu Dennis on 03.02.2022.
 //
 
-import Foundation
+import UIKit
 
 class SeriesPresenter {
-  var router: SeriesRouterProtocol?
+  var router: SeriesRouterProtocol? = SeriesRouter()
 
-  var interactor: SeriesInteractorProtocol?
+  var interactor: SeriesInteractorProtocol? = SeriesInteractor()
   var seriesSections: [SeriesLists] = []
   var collectionManager: SeriesCollectionViewManagerProtocol?
+  var series: Series?
 
+//  var navVC: UINavigationController?
   deinit {
     print("series presenter deinit")
   }
@@ -32,9 +34,12 @@ extension SeriesPresenter: SeriesPresenterProtocol {
 }
 
 extension SeriesPresenter: SeriesCollectionViewManagerDelegate {
-  func cellClicked(series: Series) {
-    // Router - present description view
-    router?.presentDecriptionVC(with: series, navVc: nil)
+  func cellClicked(series: Series, navVC: UINavigationController?) {
+    self.series = series
+    guard let id = series.id else { return }
+    interactor?.getVideo(forSeriesid: id) { [weak self] videoId in
+      self?.router?.presentDecriptionVC(with: series, videoKey: videoId, navVc: navVC)
+    }
   }
 }
 
@@ -47,6 +52,12 @@ extension SeriesPresenter: SeriesPresenterInput {
       seriesSections.append(articles)
     }
     collectionManager?.setUpMovies(seriesSections)
+  }
+
+  func seriesTrailerFetchSuccess(key: String) {
+    // Router - present description view
+    guard let series else { return }
+    router?.presentDecriptionVC(with: series, videoKey: key, navVc: nil)
   }
 
   func handleError(error: Error) {

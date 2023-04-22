@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 // view to presenter
 protocol MoviesPresenterProtocol: AnyObject {
@@ -15,16 +16,17 @@ protocol MoviesPresenterProtocol: AnyObject {
 }
 
 // interactor to presenter
-protocol MoviesrPresenterInput: AnyObject {
+protocol MoviesPresenterInput: AnyObject {
   func apiFetchSuccess(movies: MovieLists)
   func handleError(error: Error)
   func genresFetchSuccess(genres: Genres)
   func genresMoviesFetchSuccess(movies: [Movie], genre: String)
+  func moviesTrailerFetchSuccess(key: String)
 }
 
 // manager to presenter
 protocol MoviesCollectionViewManagerDelegate: AnyObject {
-  func cellClicked(movie: Movie)
+  func cellClicked(movie: Movie, navVc: UINavigationController?)
 }
 
 // GenreVC to presenter

@@ -9,8 +9,9 @@ import UIKit
 
 // class SearchSugestionsTableViewVC: UITableViewController {
 class SearchSuggestionsVC: UIViewController {
-  weak var router: SearchRouterProtocol?
+  var presenter: SearchTableViewManagerDelegate? = SearchPresenter()
   //    var movies: String?
+//    presenter
   var movies: [Movie] = []
   var series: [Series] = []
   var contentType: ContentType = .movies
@@ -80,9 +81,9 @@ extension SearchSuggestionsVC: UICollectionViewDelegate {
     collectionView.deselectItem(at: indexPath, animated: true)
     switch contentType {
     case .movies:
-      router?.presentDecriptionVC(with: movies[indexPath.row], navVc: navigationController)
+      presenter?.cellClicked(movie: movies[indexPath.row], navVc: navigationController)
     case .series:
-      router?.presentDecriptionVC(with: series[indexPath.row], navVc: navigationController)
+      presenter?.cellClicked(series: series[indexPath.row], navVc: navigationController)
     }
   }
 }

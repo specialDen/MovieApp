@@ -8,16 +8,17 @@
 import Foundation
 
 protocol MoviesInteractorProtocol {
-  var presenter: MoviesrPresenterInput? { get set }
+  var presenter: MoviesPresenterInput? { get set }
   var apiManager: NetworkService<MoviesEndpoint>? { get }
   func getMovies()
   func getGenres()
   func getGenreMovies(withGenre genre: GenreModel)
+  func getVideo(forMovieid id: Int, completion: @escaping (String) -> Void)
 }
 
 class MoviesInteractor: MoviesInteractorProtocol {
-  weak var presenter: MoviesrPresenterInput?
-  var apiManager: NetworkService<MoviesEndpoint>?
+  weak var presenter: MoviesPresenterInput?
+  var apiManager: NetworkService<MoviesEndpoint>? = NetworkService()
 
   func getMovies() {
     for movieCategory in MovieLists.allCases {
@@ -40,6 +41,21 @@ class MoviesInteractor: MoviesInteractorProtocol {
     performNetworkRequest(.getGenres)
   }
 
+  func getVideo(forMovieid id: Int, completion: @escaping (String) -> Void) {
+    apiManager?.networkRequest(from: MoviesEndpoint.getVideo(forMovieid: id), modelType: VideoData.self) { result in
+      switch result {
+      case let .success(videos):
+        guard let key = videos.results.first?.key else {
+          return
+        }
+        print("gotten")
+        completion(key)
+      case let .failure(error):
+        print(error.localizedDescription)
+      }
+    }
+  }
+
   func getGenreMovies(withGenre genre: GenreModel) {
     performNetworkRequest(.getMovies(withGenre: genre))
   }
@@ -56,6 +72,8 @@ class MoviesInteractor: MoviesInteractorProtocol {
       presenter?.apiFetchSuccess(movies: .topRatedMovies(movieData))
     case .getPopularMovies:
       presenter?.apiFetchSuccess(movies: .popularMovies(movieData))
+    case .getVideo:
+      break
     case .getGenres:
       break
     case .searchForMovies:
@@ -96,6 +114,7 @@ class MoviesInteractor: MoviesInteractorProtocol {
         }
 
       })
+
     default:
       apiManager?.networkRequest(from: endpoint, modelType: MoviesData.self, completion: { [weak self] result in
         switch result {

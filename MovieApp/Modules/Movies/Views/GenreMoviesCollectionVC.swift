@@ -10,6 +10,7 @@ import UIKit
 class GenreMoviesCollectionVC: UIViewController {
   let router: MoviesRouterProtocol = MoviesRouter()
   //    var movies: String?
+  let presenter = MoviesPresenter()
   var movies: [Movie] = []
 
   override func viewDidLoad() {
@@ -63,7 +64,8 @@ extension GenreMoviesCollectionVC: UICollectionViewDelegate {
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: true)
-    router.presentDecriptionVC(with: movies[indexPath.row], navVc: navigationController)
+    presenter.cellClicked(movie: movies[indexPath.row], navVc: navigationController)
+//    router.presentDecriptionVC(with: movies[indexPath.row], navVc: navigationController)
   }
 }
 

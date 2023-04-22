@@ -5,7 +5,7 @@
 //  Created by Izuchukwu Dennis on 14.10.2022.
 //
 
-import Foundation
+import UIKit
 
 protocol SearchPresenterProtocol: AnyObject {
 //    func viewDidLoad()
@@ -21,10 +21,12 @@ protocol SearchPresenterInput: AnyObject {
   func seriesFetchSuccess(series: [Series], searchString: String)
   func topMoviesFetchSuccess(movies: [Movie])
   func topMoviesFetchSuccess(series: [Series])
+  func seriesTrailerFetchSuccess(key: String)
+  func moviesTrailerFetchSuccess(key: String)
 }
 
 // manager to presenter
 protocol SearchTableViewManagerDelegate: AnyObject {
-  func cellClicked(movie: Movie)
-  func cellClicked(series: Series)
+  func cellClicked(movie: Movie, navVc: UINavigationController?)
+  func cellClicked(series: Series, navVc: UINavigationController?)
 }

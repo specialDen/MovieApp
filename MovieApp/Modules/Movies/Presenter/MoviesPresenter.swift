@@ -6,13 +6,17 @@
 //
 
 import Foundation
+import UIKit
 
 class MoviesPresenter {
-  var router: MoviesRouterProtocol?
+  var router: MoviesRouterProtocol? = MoviesRouter()
 
-  var interactor: MoviesInteractorProtocol?
+  var interactor: MoviesInteractorProtocol? = MoviesInteractor()
+
   var movieSections: [MovieLists] = []
   var collectionManager: MoviesCollectionViewManagerProtocol?
+  var movie: Movie?
+  var navVc: UINavigationController?
 
   deinit {
     print("movies presenter deinit")
@@ -31,12 +35,21 @@ extension MoviesPresenter: MoviesPresenterProtocol {
 }
 
 extension MoviesPresenter: MoviesCollectionViewManagerDelegate {
-  func cellClicked(movie: Movie) {
-    router?.presentDecriptionVC(with: movie, navVc: nil)
+  func cellClicked(movie: Movie, navVc: UINavigationController?) {
+    self.movie = movie
+    self.navVc = navVc
+    guard let id = movie.id else { return }
+    interactor?.getVideo(forMovieid: id) { [weak self] videoId in
+      self?.router?.presentDecriptionVC(with: movie, videoKey: videoId, navVc: navVc)
+    }
   }
 }
 
-extension MoviesPresenter: MoviesrPresenterInput {
+extension MoviesPresenter: MoviesPresenterInput {
+  func moviesTrailerFetchSuccess(key: String) {
+//    guard let movie else { return }
+  }
+
   func apiFetchSuccess(movies: MovieLists) {
     // Manager- setupMovies
     if let index = movieSections.firstIndex(where: { $0.title == movies.title }) {

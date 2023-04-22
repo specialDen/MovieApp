@@ -95,10 +95,10 @@ extension SearchTableViewManager: UITableViewDataSource {
     tableView.deselectRow(at: indexPath, animated: true)
     switch contentType {
     case .movies:
-      delegate?.cellClicked(movie: movies[indexPath.row])
+      delegate?.cellClicked(movie: movies[indexPath.row], navVc: nil)
 
     case .series:
-      delegate?.cellClicked(series: series[indexPath.row])
+      delegate?.cellClicked(series: series[indexPath.row], navVc: nil)
     }
   }
 

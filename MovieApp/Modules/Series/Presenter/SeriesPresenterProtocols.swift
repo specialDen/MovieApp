@@ -5,7 +5,7 @@
 //  Created by Izuchukwu Dennis on 21.09.2022.
 //
 
-import Foundation
+import UIKit
 
 // view to presenter
 protocol SeriesPresenterProtocol: AnyObject {
@@ -20,11 +20,12 @@ protocol SeriesPresenterInput: AnyObject {
   func handleError(error: Error)
   func genresFetchSuccess(genres: Genres)
   func genresSeriesFetchSuccess(series: [Series], genre: String)
+  func seriesTrailerFetchSuccess(key: String)
 }
 
 // manager to presenter
 protocol SeriesCollectionViewManagerDelegate: AnyObject {
-  func cellClicked(series: Series)
+  func cellClicked(series: Series, navVC: UINavigationController?)
 }
 
 // GenreVC to presenter

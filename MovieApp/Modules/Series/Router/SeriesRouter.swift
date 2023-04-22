@@ -9,7 +9,7 @@ import UIKit
 
 protocol SeriesRouterProtocol {
   var view: UIViewController? { get }
-  func presentDecriptionVC(with series: Series, navVc: UINavigationController?)
+  func presentDecriptionVC(with series: Series, videoKey: String, navVc: UINavigationController?)
   func presentSeries(_ series: [Series], ofGenre genre: String)
   func presentGenresVC(with genres: Genres)
 }
@@ -26,13 +26,15 @@ class SeriesRouter: SeriesRouterProtocol {
     }
   }
 
-  func presentDecriptionVC(with series: Series, navVc: UINavigationController?) {
-    let decriptionVC = TitlePreviewViewController()
-    decriptionVC.configureDescription(with: series)
-    if let navVc = navVc {
-      navVc.pushViewController(decriptionVC, animated: true)
-    } else {
-      view?.navigationController?.pushViewController(decriptionVC, animated: true)
+  func presentDecriptionVC(with series: Series, videoKey: String, navVc: UINavigationController?) {
+    DispatchQueue.main.async {
+      let decriptionVC = TitlePreviewViewController()
+      decriptionVC.configureDescription(with: series, videoKey: videoKey)
+      if let navVc = navVc {
+        navVc.pushViewController(decriptionVC, animated: true)
+      } else {
+        self.view?.navigationController?.pushViewController(decriptionVC, animated: true)
+      }
     }
   }
 

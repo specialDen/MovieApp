@@ -20,6 +20,7 @@ enum MoviesEndpoint: EndPointProtocol {
   case getGenres
   case searchForMovies(searchFilter: String)
   case getMovies(withGenre: GenreModel)
+  case getVideo(forMovieid: Int)
 
   private var baseURL: String {
     return "https://api.themoviedb.org"
@@ -44,6 +45,8 @@ enum MoviesEndpoint: EndPointProtocol {
     case let .getMovies(genre):
       return baseURL + "/3/discover/movie?api_key=" + Keys
         .clientID + "&language=en-US&sort_by=popularity.desc&include_adult=false&with_genres=" + String(genre.id)
+    case let .getVideo(id):
+      return baseURL + "/3/movie/\(id)/videos?api_key=" + Keys.clientID
     }
   }
 }
@@ -55,6 +58,7 @@ enum SeriesEndpoint: EndPointProtocol {
   case getOnAirTvs
   case getGenres
   case getSeries(withGenre: GenreModel)
+  case getVideo(forSeriesid: Int)
 
   case searchForSeries(searchFilter: String)
 
@@ -79,6 +83,8 @@ enum SeriesEndpoint: EndPointProtocol {
     case let .getSeries(genre):
       return baseURL + "/3/discover/tv?api_key=" + Keys
         .clientID + "&language=en-US&sort_by=popularity.desc&include_adult=false&with_genres=" + String(genre.id)
+    case let .getVideo(id):
+      return baseURL + "/3/tv/\(id)/videos?api_key=" + Keys.clientID
     }
   }
 }
@@ -87,6 +93,8 @@ enum SearchEndpoint: EndPointProtocol {
   case searchForSeries(searchFilter: String)
   case searchForMovies(searchFilter: String)
   case searchByKeyWord(keyWord: String)
+  case getMovieVideo(forMovieid: Int)
+  case getSeriesVideo(forSeriesid: Int)
   case getTopRatedSeries
   case getTopRatedMovies
 
@@ -107,6 +115,10 @@ enum SearchEndpoint: EndPointProtocol {
       return baseURL + "/3/tv/top_rated?api_key=" + Keys.clientID + "&language=en-US&page=1"
     case .getTopRatedMovies:
       return baseURL + "/3/movie/top_rated?api_key=" + Keys.clientID + "&language=en-US&page=1"
+    case let .getMovieVideo(id):
+      return baseURL + "/3/movie/\(id)/videos?api_key=" + Keys.clientID + "&language=en-US"
+    case let .getSeriesVideo(id):
+      return baseURL + "/3/tv/\(id)/videos?api_key=" + Keys.clientID + "&language=en-US"
     }
   }
 }

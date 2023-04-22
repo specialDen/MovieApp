@@ -9,6 +9,7 @@ import UIKit
 
 class GenreSeriesCollectionVC: UIViewController {
   let router: SeriesRouterProtocol = SeriesRouter()
+  let presenter = SeriesPresenter()
   var series: [Series] = []
 
   override func viewDidLoad() {
@@ -62,7 +63,8 @@ extension GenreSeriesCollectionVC: UICollectionViewDelegate {
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: true)
-    router.presentDecriptionVC(with: series[indexPath.row], navVc: navigationController)
+    presenter.cellClicked(series: series[indexPath.row], navVC: navigationController)
+//    router.presentDecriptionVC(with: series[indexPath.row], navVc: navigationController)
   }
 }
 

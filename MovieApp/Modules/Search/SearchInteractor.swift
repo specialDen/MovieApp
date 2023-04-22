@@ -15,11 +15,13 @@ protocol SearchInteractorProtocol {
   func getSeries(with searchString: String)
   func getTopMovies()
   func getTopSeries()
+  func getVideo(forSeriesid id: Int, completion: @escaping (String) -> Void)
+  func getVideo(forMovieid id: Int, completion: @escaping (String) -> Void)
 }
 
 class SearchInteractor: SearchInteractorProtocol {
   weak var presenter: SearchPresenterInput?
-  var apiManager: NetworkService<SearchEndpoint>?
+  var apiManager: NetworkService<SearchEndpoint>? = NetworkService()
 
   func getMovies(with searchString: String) {
     performNetworkRequest(.searchForMovies(searchFilter: searchString))
@@ -82,6 +84,37 @@ class SearchInteractor: SearchInteractorProtocol {
     performNetworkRequest(.getTopRatedSeries)
   }
 
+  func getVideo(forSeriesid id: Int, completion: @escaping (String) -> Void) {
+    apiManager?
+      .networkRequest(from: SearchEndpoint.getSeriesVideo(forSeriesid: id), modelType: VideoData.self) { result in
+        switch result {
+        case let .success(videos):
+          guard let key = videos.results.first?.key else {
+            return
+          }
+          completion(key)
+        case let .failure(error):
+          print(error.localizedDescription)
+        }
+      }
+  }
+
+  func getVideo(forMovieid id: Int, completion: @escaping (String) -> Void) {
+    apiManager?
+      .networkRequest(from: SearchEndpoint.getMovieVideo(forMovieid: id), modelType: VideoData.self) { result in
+        switch result {
+        case let .success(videos):
+          guard let key = videos.results.first?.key else {
+            return
+          }
+          completion(key)
+        case let .failure(error):
+          print(error.localizedDescription)
+        }
+      }
+  }
+
+  //    swiftLint: disable cyclomatic_complexity
   private func performNetworkRequest(_ endpoint: SearchEndpoint) {
     switch endpoint {
     case .searchByKeyWord:
@@ -126,6 +159,8 @@ class SearchInteractor: SearchInteractorProtocol {
           print(error.localizedDescription)
         }
       })
+    case .getMovieVideo, .getSeriesVideo:
+      break
     }
   }
 

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 class TitlePreviewViewController: UIViewController {
   override func viewDidLoad() {
@@ -22,30 +23,30 @@ class TitlePreviewViewController: UIViewController {
   private func addSubViews() {
     view.addSubview(scrollView)
     scrollView.addSubview(contentView)
-    contentView.addSubview(imageView)
+    contentView.addSubview(webView)
     contentView.addSubview(titleLabel)
     contentView.addSubview(overviewLabel)
     contentView.addSubview(downloadButton)
   }
 
-  public func configureDescription(with model: Movie) {
+  public func configureDescription(with model: Movie, videoKey: String) {
     titleLabel.text = model.title
     overviewLabel.text = model.overview
-    guard let posterPath = model.poster_path else { return }
-    guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)") else {
+    guard let url = URL(string: "https://www.youtube.com/embed/\(videoKey)") else {
       return
     }
-    imageView.kf.setImage(with: url)
+
+    webView.load(URLRequest(url: url))
   }
 
-  public func configureDescription(with model: Series) {
+  public func configureDescription(with model: Series, videoKey: String) {
     titleLabel.text = model.name
     overviewLabel.text = model.overview
-    guard let posterPath = model.poster_path else { return }
-    guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)") else {
+    guard let url = URL(string: "https://www.youtube.com/embed/\(videoKey)") else {
       return
     }
-    imageView.kf.setImage(with: url)
+
+    webView.load(URLRequest(url: url))
   }
 
   private let titleLabel: UILabel = {
@@ -71,6 +72,12 @@ class TitlePreviewViewController: UIViewController {
     imageView.contentMode = .scaleAspectFit
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
+  }()
+
+  private let webView: WKWebView = {
+    let webView = WKWebView()
+    webView.translatesAutoresizingMaskIntoConstraints = false
+    return webView
   }()
 
   private let downloadButton: UIButton = {
@@ -113,14 +120,14 @@ class TitlePreviewViewController: UIViewController {
     setupScrollView()
 
     let imageViewConstraints = [
-      imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-      imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-      imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-      imageView.heightAnchor.constraint(equalToConstant: 300)
+      webView.topAnchor.constraint(equalTo: contentView.topAnchor),
+      webView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+      webView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+      webView.heightAnchor.constraint(equalToConstant: 300)
     ]
 
     let titleLabelConstraints = [
-      titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+      titleLabel.topAnchor.constraint(equalTo: webView.bottomAnchor, constant: 20),
       titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
       titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
     ]

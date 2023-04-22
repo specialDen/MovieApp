@@ -13,11 +13,12 @@ protocol SeriesInteractorProtocol {
   func getSeries()
   func getGenres()
   func getGenreSeries(withGenre genre: GenreModel)
+  func getVideo(forSeriesid id: Int, completion: @escaping (String) -> Void)
 }
 
 class SeriesInteractor: SeriesInteractorProtocol {
   weak var presenter: SeriesPresenterInput?
-  var apiManager: NetworkService<SeriesEndpoint>?
+  var apiManager: NetworkService<SeriesEndpoint>? = NetworkService()
 
   func getSeries() {
     for seriesCategory in SeriesLists.allCases {
@@ -30,6 +31,20 @@ class SeriesInteractor: SeriesInteractorProtocol {
         performNetworkRequest(.getOnAirTvs)
       case .popularSeries:
         performNetworkRequest(.getPopularSeries)
+      }
+    }
+  }
+
+  func getVideo(forSeriesid id: Int, completion: @escaping (String) -> Void) {
+    apiManager?.networkRequest(from: SeriesEndpoint.getVideo(forSeriesid: id), modelType: VideoData.self) { result in
+      switch result {
+      case let .success(videos):
+        guard let key = videos.results.first?.key else {
+          return
+        }
+        completion(key)
+      case let .failure(error):
+        print(error.localizedDescription)
       }
     }
   }
@@ -52,6 +67,8 @@ class SeriesInteractor: SeriesInteractorProtocol {
       presenter?.apiFetchSuccess(articles: .latestSeries(movieData))
     case .getOnAirTvs:
       presenter?.apiFetchSuccess(articles: .onAirTvs(movieData))
+    case .getVideo:
+      break
     case .getGenres:
       break
     case .getSeries:
@@ -92,6 +109,7 @@ class SeriesInteractor: SeriesInteractorProtocol {
         }
 
       })
+
     default:
       apiManager?.networkRequest(from: endpoint, modelType: SeriesData.self, completion: { [weak self] result in
         switch result {

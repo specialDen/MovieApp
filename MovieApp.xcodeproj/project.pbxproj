@@ -23,6 +23,7 @@
 		B623F29F28F9A5590019F493 /* SearchAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B623F29E28F9A5590019F493 /* SearchAssembly.swift */; };
 		B623F2A128F9A60F0019F493 /* SearchPresenterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = B623F2A028F9A60F0019F493 /* SearchPresenterProtocols.swift */; };
 		B623F2A328F9A66D0019F493 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B623F2A228F9A66D0019F493 /* SearchResultsViewController.swift */; };
+		B6245CAC29F3CF0C004F9387 /* NetworkCallsFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6245CAB29F3CF0C004F9387 /* NetworkCallsFacade.swift */; };
 		B63066D928C39FA10094186E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63066D828C39FA10094186E /* AppCoordinator.swift */; };
 		B63066DC28C3A7AA0094186E /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63066DB28C3A7AA0094186E /* UIImageExtensions.swift */; };
 		B63066DE28C3B6F90094186E /* AppInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63066DD28C3B6F90094186E /* AppInteractor.swift */; };
@@ -84,6 +85,7 @@
 		B623F29E28F9A5590019F493 /* SearchAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAssembly.swift; sourceTree = "<group>"; };
 		B623F2A028F9A60F0019F493 /* SearchPresenterProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenterProtocols.swift; sourceTree = "<group>"; };
 		B623F2A228F9A66D0019F493 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		B6245CAB29F3CF0C004F9387 /* NetworkCallsFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCallsFacade.swift; sourceTree = "<group>"; };
 		B63066D828C39FA10094186E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		B63066DB28C3A7AA0094186E /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		B63066DD28C3B6F90094186E /* AppInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInteractor.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				B68E0DFA28C65E8900B74972 /* NetworkService.swift */,
 				B69479A127B1D9B20069F8E7 /* Keys.swift */,
 				B689D0C727B2E485005A5571 /* EndPoints.swift */,
+				B6245CAB29F3CF0C004F9387 /* NetworkCallsFacade.swift */,
 			);
 			path = NetworkServices;
 			sourceTree = "<group>";
@@ -415,7 +418,6 @@
 				B6E169C327AA80FB0090A96F /* Frameworks */,
 				B6E169C427AA80FB0090A96F /* Resources */,
 				B68306DD29B202D90010E054 /* SwiftFormat */,
-				B68306DC29B1FBF20010E054 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -478,24 +480,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B68306DC29B1FBF20010E054 /* SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = SwiftLint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nexport PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
 		B68306DD29B202D90010E054 /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -521,6 +505,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6245CAC29F3CF0C004F9387 /* NetworkCallsFacade.swift in Sources */,
 				B68E0DF828C6570D00B74972 /* TitlePreviewViewController.swift in Sources */,
 				B623F2A128F9A60F0019F493 /* SearchPresenterProtocols.swift in Sources */,
 				B623F29528F9A49B0019F493 /* SearchInteractor.swift in Sources */,

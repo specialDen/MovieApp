@@ -33,7 +33,8 @@ struct SearchAssembly {
     interactor.presenter = presenter
     interactor.apiManager = NetworkService()
 
-    searchSuggestionsVC.router = router
+//      collectionManager.delegate = presenter
+//    searchSuggestionsVC.router = router
 
     router.view = searchViewController
     router.searchSuggestionsVC = searchSuggestionsVC

@@ -10,8 +10,8 @@ import UIKit
 protocol SearchRouterProtocol: AnyObject {
   var view: UIViewController? { get }
   var searchSuggestionsVC: SearchSuggestionsVC? { get }
-  func presentDecriptionVC(with movie: Movie, navVc: UINavigationController?)
-  func presentDecriptionVC(with series: Series, navVc: UINavigationController?)
+  func presentDecriptionVC(with movie: Movie, videoKey: String, navVc: UINavigationController?)
+  func presentDecriptionVC(with series: Series, videoKey: String, navVc: UINavigationController?)
 //    func presentGenresVC(with genres: Genres)
   func presentSearchSuggestionsVC(with movies: [Movie])
   func presentSearchSuggestionsVC(with series: [Series])
@@ -38,19 +38,21 @@ class SearchRouter: SearchRouterProtocol {
 
   var view: UIViewController?
   var searchSuggestionsVC: SearchSuggestionsVC?
-  func presentDecriptionVC(with movie: Movie, navVc: UINavigationController?) {
-    let decriptionVC = TitlePreviewViewController()
-    decriptionVC.configureDescription(with: movie)
-    if let navVc = navVc {
-      navVc.pushViewController(decriptionVC, animated: true)
-    } else {
-      view?.navigationController?.pushViewController(decriptionVC, animated: true)
+  func presentDecriptionVC(with movie: Movie, videoKey: String, navVc: UINavigationController?) {
+    DispatchQueue.main.async {
+      let decriptionVC = TitlePreviewViewController()
+      decriptionVC.configureDescription(with: movie, videoKey: videoKey)
+      if let navVc = navVc {
+        navVc.pushViewController(decriptionVC, animated: true)
+      } else {
+        self.view?.navigationController?.pushViewController(decriptionVC, animated: true)
+      }
     }
   }
 
-  func presentDecriptionVC(with series: Series, navVc: UINavigationController?) {
+  func presentDecriptionVC(with series: Series, videoKey: String, navVc: UINavigationController?) {
     let decriptionVC = TitlePreviewViewController()
-    decriptionVC.configureDescription(with: series)
+    decriptionVC.configureDescription(with: series, videoKey: videoKey)
     if let navVc = navVc {
       navVc.pushViewController(decriptionVC, animated: true)
     } else {

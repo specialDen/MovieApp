@@ -23,6 +23,18 @@ struct Movie: Codable {
 //    let name: String?
 }
 
+struct VideoData: Codable {
+  let id: Int
+  let results: [Results]
+}
+
+struct Results: Codable {
+  let key: String
+  let site: String
+  let official: Bool
+  let id: String
+}
+
 struct InformationData {
   let id: Int?
   let vote_average: Double?

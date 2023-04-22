@@ -49,7 +49,7 @@ extension MoviesCollectionViewManager: MoviesCollectionViewManagerProtocol {
 extension MoviesCollectionViewManager: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: false)
-    delegate?.cellClicked(movie: movieSections[indexPath.section].items[indexPath.row])
+    delegate?.cellClicked(movie: movieSections[indexPath.section].items[indexPath.row], navVc: nil)
   }
 }
 
@@ -77,7 +77,6 @@ extension MoviesCollectionViewManager: UICollectionViewDataSource {
       return cell
     }
     cell.configure(with: moviePosterPath)
-
     return cell
   }
 
