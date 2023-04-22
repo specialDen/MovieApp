@@ -55,10 +55,10 @@ List of features ready and TODOs for future development
 * Discover movies by Genres
 * Discover news by Sources
 * Search for specific movies/series
+* Play movie/series trailers.
 
 
 To-do list:
-* Play movie/series trailers.
 * Sign up / Sign in / Sign out including user's image
 * Change User photo
 * Change few app settings
